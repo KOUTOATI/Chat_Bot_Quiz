@@ -1,301 +1,294 @@
-# Chat_Bot_Quiz
-🤖 Chatbot de quiz interactif avec IA - FastAPI + React + Google Gemini API
-# 🎯 Quiz Chatbot - AI-Powered Interactive Quiz Platform
+# 🎯 Quiz Chatbot avec Gemini API
 
-Un chatbot intelligent qui génère et propose des quiz personnalisés sur n'importe quel sujet grâce à l'API Google Gemini.
+Un chatbot interactif qui génère et pose des quiz à l'utilisateur en utilisant l'API Gemini de Google.
 
-## ✨ Fonctionnalités
+## 📋 Table des matières
 
-- 💬 Chat conversationnel avec IA
-- 📚 Génération automatique de quiz sur demande
-- 🎚️ Niveaux de difficulté ajustables (facile, moyen, difficile)
-- 📊 Système de scoring et feedback instantané
-- 🔄 Interface temps réel avec WebSocket
-- 🎨 Interface utilisateur moderne et responsive
+- [Aperçu](#aperçu)
+- [Fonctionnalités](#fonctionnalités)
+- [Technologies utilisées](#technologies-utilisées)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Utilisation](#utilisation)
+- [Structure du projet](#structure-du-projet)
+- [API Endpoints](#api-endpoints)
+- [Déploiement](#déploiement)
+- [Contribuer](#contribuer)
 
-## 🛠️ Stack Technique
+## 🎨 Aperçu
 
-- **Backend**: FastAPI, Python 3.10+
-- **Frontend**: React.js, Axios
-- **IA**: Google Gemini API
-- **Base de données**: PostgreSQL (optionnel)
-- **Containerisation**: Docker
-
-## 📦 Dépôts
-
-- [Backend (FastAPI)](lien-vers-repo-backend)
-- [Frontend (React)](lien-vers-repo-frontend)
-
-## 🚀 Démarrage rapide
-
-Voir les README des dépôts backend et frontend pour les instructions d'installation.
-
-## 👥 Contribution
-
-Les contributions sont les bienvenues ! Consultez nos guidelines de contribution.
-
-## 📄 Licence
-
-MIT License
-```
-
----
-
-## 🔧 Pour le dépôt BACKEND
-
-### Description courte
-```
-🔌 Backend API pour Quiz Chatbot - FastAPI + Google Gemini API
-```
-
-### Tags GitHub
-```
-fastapi, python, gemini-api, chatbot, quiz, api, websocket, ai, backend, rest-api
-
-# 🔌 Quiz Chatbot - Backend API
-
-API REST construite avec FastAPI pour alimenter le chatbot de quiz interactif.
-
-## 🎯 Fonctionnalités
-
-- ✅ Endpoints REST pour gestion des quiz
-- ✅ WebSocket pour chat en temps réel
-- ✅ Intégration Google Gemini API
-- ✅ Validation des données avec Pydantic
-- ✅ Documentation auto-générée (Swagger/OpenAPI)
-- ✅ Support CORS pour le frontend React
-
-## 📋 Prérequis
-
-- Python 3.10+
-- Clé API Google Gemini
-- PostgreSQL (optionnel)
-
-## 🚀 Installation
-```bash
-# Cloner le dépôt
-git clone [url-du-repo]
-
-# Créer environnement virtuel
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate  # Windows
-
-# Installer les dépendances
-pip install -r requirements.txt
-
-# Configurer les variables d'environnement
-cp .env.example .env
-# Éditer .env avec vos clés API
-
-# Lancer le serveur
-uvicorn app.main:app --reload
-```
-
-## 📚 Documentation API
-
-Une fois lancé, accédez à :
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-## 🔗 Endpoints principaux
-```
-POST   /api/chat/message       - Envoyer un message au chatbot
-POST   /api/quiz/generate      - Générer un nouveau quiz
-POST   /api/quiz/answer        - Soumettre une réponse
-GET    /api/quiz/{id}/score    - Obtenir le score
-WS     /api/chat/ws/{session}  - WebSocket chat
-```
-
-## 🏗️ Structure du projet
-```
-backend/
-├── app/
-│   ├── api/          # Routes et endpoints
-│   ├── core/         # Logique métier (Gemini client)
-│   ├── models/       # Modèles Pydantic
-│   ├── services/     # Services métier
-│   └── main.py       # Point d'entrée
-├── tests/
-└── requirements.txt
-```
-
-## 🧪 Tests
-```bash
-pytest
-```
-
-## 🔒 Sécurité
-
-- Ne jamais commiter le fichier `.env`
-- Utiliser des variables d'environnement pour les secrets
-- Valider toutes les entrées utilisateur
-
-## 🤝 Contribution
-
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit (`git commit -m 'Add AmazingFeature'`)
-4. Push (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
-
-## 📝 Licence
-
-MIT
-```
-
----
-
-## ⚛️ Pour le dépôt FRONTEND
-
-### Description courte
-```
-🎨 Interface utilisateur React pour Quiz Chatbot - UI moderne et responsive
-```
-
-### Tags GitHub
-```
-react, javascript, chatbot, quiz, frontend, ui, gemini, axios, websocket, responsive
-
-# 🎨 Quiz Chatbot - Frontend React
-
-Interface utilisateur moderne et interactive pour le chatbot de quiz propulsé par IA.
+Ce projet est un chatbot intelligent qui :
+- Génère des questions de quiz sur différents sujets
+- Interagit avec l'utilisateur de manière conversationnelle
+- Évalue les réponses et donne un feedback immédiat
+- Garde un historique de la conversation
+- Calcule et affiche les scores
 
 ## ✨ Fonctionnalités
 
-- 💬 Interface de chat fluide et intuitive
-- 🎯 Composants de quiz interactifs
-- 📱 Design responsive (mobile, tablette, desktop)
-- ⚡ Communication temps réel via WebSocket
-- 🎨 UI/UX moderne avec animations
-- 🌙 Mode sombre/clair (optionnel)
+- 🤖 **Intelligence artificielle** : Utilise Gemini API pour générer des quiz personnalisés
+- 💬 **Interface conversationnelle** : Chat fluide et intuitif
+- 📊 **Suivi des scores** : Comptabilise les bonnes et mauvaises réponses
+- 🎲 **Thèmes variés** : Quiz sur différents sujets (histoire, sciences, culture générale, etc.)
+- 🔄 **Temps réel** : Réponses instantanées du chatbot
+- 📱 **Responsive** : Fonctionne sur tous les appareils
 
-## 📋 Prérequis
+## 🛠️ Technologies utilisées
 
+### Backend
+- **FastAPI** : Framework web Python moderne et rapide
+- **Google Gemini API** : IA générative pour créer les quiz
+- **Uvicorn** : Serveur ASGI pour FastAPI
+- **Pydantic** : Validation des données
+- **Python-dotenv** : Gestion des variables d'environnement
+
+### Frontend
+- **React** : Bibliothèque JavaScript pour l'interface utilisateur
+- **Axios** : Client HTTP pour les requêtes API
+- **CSS3** : Stylisation moderne et responsive
+
+## 🏗️ Architecture
+
+```
+┌─────────────┐         ┌──────────────┐         ┌─────────────┐
+│   React     │ ◄─────► │   FastAPI    │ ◄─────► │  Gemini API │
+│  Frontend   │  HTTP   │   Backend    │  HTTP   │   (Google)  │
+└─────────────┘         └──────────────┘         └─────────────┘
+```
+
+Le frontend React communique avec le backend FastAPI via des requêtes HTTP. Le backend utilise l'API Gemini pour générer les questions et évaluer les réponses.
+
+## 📦 Installation
+
+### Prérequis
+
+- Python 3.9+
 - Node.js 16+
 - npm ou yarn
-- Backend API en cours d'exécution
+- Une clé API Google Gemini ([obtenir une clé](https://makersuite.google.com/app/apikey))
 
-## 🚀 Installation
+### Backend
+
+1. **Cloner le repository**
 ```bash
-# Cloner le dépôt
-git clone [url-du-repo]
+git clone <votre-repo>
+cd quiz-chatbot/backend
+```
 
-# Installer les dépendances
-npm install
-# ou
-yarn install
+2. **Créer un environnement virtuel**
+```bash
+python -m venv venv
+source venv/bin/activate  # Sur Windows: venv\Scripts\activate
+```
 
-# Configurer les variables d'environnement
+3. **Installer les dépendances**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Configurer les variables d'environnement**
+```bash
 cp .env.example .env
-# Éditer .env avec l'URL de votre backend
+# Éditer .env et ajouter votre clé API Gemini
+```
 
-# Lancer en développement
+### Frontend
+
+1. **Aller dans le dossier frontend**
+```bash
+cd ../frontend
+```
+
+2. **Installer les dépendances**
+```bash
+npm install
+```
+
+## ⚙️ Configuration
+
+### Backend (.env)
+
+Créez un fichier `.env` dans le dossier `backend/` :
+
+```env
+GEMINI_API_KEY=votre_clé_api_gemini
+BACKEND_PORT=8000
+ALLOWED_ORIGINS=http://localhost:3000
+```
+
+### Frontend
+
+Le frontend est configuré pour se connecter au backend sur `http://localhost:8000`. Si nécessaire, modifiez l'URL dans `frontend/src/services/api.js`.
+
+## 🚀 Utilisation
+
+### Démarrer le Backend
+
+```bash
+cd backend
+source venv/bin/activate  # Sur Windows: venv\Scripts\activate
+python main.py
+```
+
+Le serveur démarre sur `http://localhost:8000`
+
+### Démarrer le Frontend
+
+Dans un nouveau terminal :
+
+```bash
+cd frontend
 npm start
-# ou
-yarn start
 ```
 
-L'application sera accessible sur http://localhost:3000
+L'application s'ouvre sur `http://localhost:3000`
 
-## 🏗️ Structure du projet
+### Utiliser l'application
+
+1. Ouvrez votre navigateur sur `http://localhost:3000`
+2. Choisissez un thème de quiz ou laissez le chatbot vous proposer
+3. Répondez aux questions dans le chat
+4. Consultez votre score en temps réel
+5. Demandez de nouveaux quiz quand vous voulez !
+
+## 📁 Structure du projet
+
 ```
-frontend/
-├── src/
-│   ├── components/   # Composants réutilisables
-│   │   ├── Chat/    # Composants de chat
-│   │   └── Quiz/    # Composants de quiz
-│   ├── pages/       # Pages de l'application
-│   ├── services/    # Appels API
-│   ├── hooks/       # Hooks personnalisés
-│   ├── context/     # Context API
-│   └── utils/       # Utilitaires
-├── public/
-└── package.json
-```
-
-## 📦 Scripts disponibles
-```bash
-npm start          # Développement
-npm run build      # Build production
-npm test           # Tests
-npm run eject      # Eject configuration
-```
-
-## 🔌 Configuration Backend
-
-Dans `.env`:
-```
-REACT_APP_API_URL=http://localhost:8000/api
-REACT_APP_WS_URL=ws://localhost:8000/api/chat/ws
-```
-
-## 🎨 Composants principaux
-
-- **ChatContainer**: Gestion du chat
-- **QuizContainer**: Gestion des quiz
-- **QuestionCard**: Affichage des questions
-- **ScoreDisplay**: Affichage des résultats
-
-## 🧪 Tests
-```bash
-npm test
+quiz-chatbot/
+├── backend/
+│   ├── main.py                 # Point d'entrée FastAPI
+│   ├── requirements.txt        # Dépendances Python
+│   ├── .env.example           # Template variables d'environnement
+│   ├── .env                   # Variables d'environnement (git ignored)
+│   └── README.md              # Documentation backend
+│
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ChatBox.js     # Composant de chat
+│   │   │   ├── ChatBox.css    # Styles du chat
+│   │   │   ├── Message.js     # Composant message
+│   │   │   └── ScoreBoard.js  # Affichage du score
+│   │   ├── services/
+│   │   │   └── api.js         # Service API
+│   │   ├── App.js             # Composant principal
+│   │   ├── App.css            # Styles globaux
+│   │   └── index.js           # Point d'entrée React
+│   ├── package.json
+│   └── README.md              # Documentation frontend
+│
+└── README.md                  # Ce fichier
 ```
 
-## 📱 Build pour production
+## 🔌 API Endpoints
+
+### POST /chat
+Envoyer un message au chatbot
+
+**Request:**
+```json
+{
+  "message": "Je veux un quiz sur l'histoire",
+  "conversation_history": []
+}
+```
+
+**Response:**
+```json
+{
+  "response": "Super ! Voici votre première question...",
+  "conversation_history": [...],
+  "score": {
+    "correct": 0,
+    "incorrect": 0,
+    "total": 0
+  }
+}
+```
+
+### POST /reset
+Réinitialiser la conversation
+
+**Response:**
+```json
+{
+  "message": "Conversation réinitialisée",
+  "conversation_history": []
+}
+```
+
+### GET /health
+Vérifier l'état du serveur
+
+**Response:**
+```json
+{
+  "status": "healthy"
+}
+```
+
+## 🌐 Déploiement
+
+### Backend (Render / Railway / Heroku)
+
+1. Créez un fichier `Procfile`:
+```
+web: uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+2. Assurez-vous que `requirements.txt` est à jour
+
+3. Configurez les variables d'environnement sur votre plateforme
+
+### Frontend (Vercel / Netlify)
+
+1. Build le projet:
 ```bash
 npm run build
 ```
 
-Les fichiers optimisés seront dans le dossier `build/`
+2. Déployez le dossier `build/` sur votre plateforme
 
-## 🤝 Contribution
+3. Configurez l'URL du backend dans les variables d'environnement
+
+## 🤝 Contribuer
+
+Les contributions sont les bienvenues !
 
 1. Fork le projet
-2. Créer une branche feature
-3. Commit vos changements
-4. Push et ouvrir une PR
+2. Créez une branche (`git checkout -b feature/AmazingFeature`)
+3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrez une Pull Request
 
-## 📝 Licence
+## 📝 Améliorations futures
 
-MIT
-```
+- [ ] Authentification utilisateur
+- [ ] Sauvegarde des scores dans une base de données
+- [ ] Mode multijoueur
+- [ ] Différents niveaux de difficulté
+- [ ] Export des résultats en PDF
+- [ ] Support multilingue
+- [ ] Personnalisation des thèmes visuels
+- [ ] Mode hors-ligne avec questions pré-chargées
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+
+## 👨‍💻 Auteur
+
+Votre Nom - [@votre_twitter](https://twitter.com/votre_twitter)
+
+## 🙏 Remerciements
+
+- Google pour l'API Gemini
+- La communauté FastAPI
+- La communauté React
 
 ---
 
-## 🏷️ Topics/Tags recommandés pour GitHub
-
-### Pour tous les dépôts:
-```
-quiz
-chatbot
-gemini-api
-ai
-machine-learning
-education
-interactive
-learning-platform
-```
-
-### Spécifiques Backend:
-```
-fastapi
-python
-rest-api
-websocket
-pydantic
-async
-api-development
-```
-
-### Spécifiques Frontend:
-```
-react
-reactjs
-javascript
-ui
-ux
-responsive-design
-spa
-single-page-app
+**Note:** N'oubliez pas de garder votre clé API Gemini secrète et de ne jamais la commit dans Git !
